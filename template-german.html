@@ -1,0 +1,85 @@
+<p><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Sehr geehrte Frau/Herr ${object.partner_id.name},</span><br><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Vielen Dank für Ihre Anfrage.<br>Unsere Preis- und Versandinformationen lauten wie folgt:</span></p>
+<br>
+<style>
+    .tem-table {
+        display: table;
+        border-top: 1px solid;
+        border-left: 1px solid;
+    }
+
+    .tem-header {
+        display: table-header-group;
+        font-weight: bold;
+    }
+
+    .tem-footer {
+        display: table-footer-group;
+        font-weight: bold;
+    }
+
+    .tem-element {
+        display: table-cell;
+        padding: 2px 4px;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+    }
+
+    .tem-row {
+        display: table-row;
+    }
+</style>
+
+<div class="tem-table">
+    <div class="tem-header">
+        <div class="tem-row">
+            <div class="tem-element">Kat. Nr.</div>
+            <div class="tem-element">Beschreibung</div>
+            <div class="tem-element">Packung</div>
+            <div class="tem-element">Stückpreis</div>
+            <div class="tem-element">Menge</div>
+            <div class="tem-element" style="text-align:right;">Preis (${object.pricelist_id.currency_id.name})</div>
+            <div class="tem-element">Datenblatt</div>
+            <div class="tem-element">Lieferzeit*</div>
+        </div>
+    </div>
+    <div style="display:table-row-group;">
+        % for line in object.order_line:
+        <div class="tem-row">
+            <div class="tem-element">${line.product_id.x_studio_sku_1}</div>
+            <div class="tem-element">${line.name}</div>
+            <div class="tem-element">${line.x_studio_pack_size}</div>
+            <div class="tem-element">${line.price_unit}</div>
+            <div class="tem-element">${"%0.00f" % line.product_uom_qty}</div>
+            <div class="tem-element" style="text-align:right;">
+                ${ ("%0.02f" % line.price_subtotal) if (line.price_subtotal != False) else "" }
+            </div>
+            <div class="tem-element">
+                % if line.product_id and line.product_id.data_sheet_link
+                <a href="https://resources.amsbio.com/${line.product_id.data_sheet_link}">${line.x_studio_sku_1}</a>
+                % endif
+            </div>
+            <div class="tem-element">${line.qty_available_today or ''}</div>
+        </div>
+        % endfor
+    </div>
+    <div class="tem-footer">
+        <div class="tem-row">
+            <div class="tem-element">Total:</div>
+            <div class="tem-element"></div>
+            <div class="tem-element"></div>
+            <div class="tem-element"></div>
+            <div class="tem-element"></div>
+            <div class="tem-element" style="text-align:right;">${object.amount_total}</div>
+        </div>
+    </div>
+</div>
+<p style="font-size:smaller;color:grey;">*Angaben bzgl. Lieferzeit/Lieferkosten ohne Gewähr.</p>
+<br>
+<p>Bestellungen nehmen wir gern per <a href="${object.company_id.email}">email</a> (${object.company_id.email}), Fax oder Telefon entgegen. Oder bestellen sie einfach online über die obenstehenden Links. 
+    <br>Weitere Bestellinformationen finden Sie in unseren <a href="https://www.amsbio.com/terms-of-sale">AGB</a>.</p>
+<br>
+<p>Besuchen Sie auch unsere <a href="www.amsbio.com">webseite</a>, (www.amsbio.com), für weitere Preisinformationen und technische Spezifikationen zu <strong>mehr als 1.700.000 Produkten.</strong> Lassen Sie uns wissen welche Techniken Sie im Labor verwenden und wir senden Ihnen gern Informationen von relevanten Produkten zu.</p>
+<br>
+<p>Für weitere Fragen stehe ich selbstverständlich gern zur Verfügung.</p>
+<p>Mit freundlichen Grüßen,</p>
+<p>${object.user_id.name or object.company_id.name}</p>

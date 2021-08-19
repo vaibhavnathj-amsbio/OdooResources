@@ -1,0 +1,121 @@
+
+<style>
+  .custom-format {
+    font-family: 'Lucica Grande', Arial, Verdana, sans-serif;
+    font-size: 12px;
+    color: rgb(34, 34, 34);
+    background-color: #FFF;
+  }
+
+  .tem-table {
+    display: table;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+
+  .tem-header {
+    display: table-header-group;
+    font-weight: bold;
+  }
+
+  .tem-footer {
+    display: table-footer-group;
+    font-weight: bold;
+  }
+
+  .tem-element {
+    display: table-cell;
+    padding: 2px 4px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+
+  .tem-row {
+    display: table-row;
+  }
+</style>
+<p>Bonjour&nbsp;${object.partner_id.name}</p>
+<p>Merci de votre intérêt pour AMSBIO. <br>Vous trouverez plus amples informations sur ces produits au</p><br>
+<span style="font-weight:bold;">INFORMATION COMMANDE:</span><br>
+<div class="tem-table">
+  <div class="tem-header">
+    <div class="tem-row">
+      <div class="tem-element">Référence</div>
+      <div class="tem-element">Description</div>
+      <div class="tem-element">Conditionnement</div>
+      <div class="tem-element">Prix unitaire</div>
+      <div class="tem-element">Quantité</div>
+      <div class="tem-element" style="text-align:right;">Prix (${object.pricelist_id.currency_id.name})</div>
+      <div class="tem-element">Fiche technique</div>
+      <div class="tem-element">Disponibilité*</div>
+    </div>
+  </div>
+  <div style="display:table-row-group;">
+    % for line in object.order_line:
+    <div class="tem-row">
+      <div class="tem-element">${line.product_id.x_studio_sku_1}</div>
+      <div class="tem-element">${line.name}</div>
+      <div class="tem-element">${line.x_studio_pack_size}</div>
+      <div class="tem-element">${line.price_unit}</div>
+      <div class="tem-element">${"%0.00f" % line.product_uom_qty}</div>
+      <div class="tem-element" style="text-align:right;">
+        ${ ("%0.02f" % line.price_subtotal) if (line.price_subtotal != False) else "" }
+      </div>
+      <div class="tem-element">
+        % if line.product_id and line.product_id.data_sheet_link
+        <a href="https://resources.amsbio.com/${line.product_id.data_sheet_link}">${line.x_studio_sku_1}</a>
+        % endif
+      </div>
+      <div class="tem-element">${line.qty_available_today or ''}</div>
+    </div>
+    % endfor
+  </div>
+  <div class="tem-footer">
+    <div class="tem-row">
+      <div class="tem-element">Frais de port:</div>
+      <div class="tem-element"></div>
+      <div class="tem-element"></div>
+      <div class="tem-element"></div>
+      <div class="tem-element"></div>
+      <div class="tem-element" style="text-align:right;">${object.amount_total}</div>
+    </div>
+  </div>
+</div>
+<p style="font-size:smaller;color:grey;">*Noter que les délais de livraison sont des estimations au meilleur de notre connaissance et notre expérience. Les frais de port peuvent différer pour les livraisons en carboglace</p>
+<br>
+<div class="custom-format">
+  <div><span style="font-weight:bold;">PROCEDURE de COMMANDE</span></div>
+  <div>
+    <ol>
+      <li>Telephone au +44 (0) 1235 828 200</li>
+      <li>Fax au +44 (0) 1235 820 48</li>
+      <li>En ligne au <a href="www.amsbio.com">www.amsbio.com</a> ou simplement en ajoutant les produits à votre panier</li>
+      <li>Courriel au <a href="${object.company_id.email}">${object.company_id.email}</a></li>
+      <li>Nous sommes également disponible via Sciquest, Ariba et plus… Est-ce que nos produits sont intégrés dans votre système d’achat?
+        Sinon, n’hésitez pas à nous le signaler !</li>
+    </ol>
+  </div>
+  <div>
+    Si vous désirez profiter de cette offre, merci de rappeler le code ci-dessous sur votre bon de commande:<br>
+    <span style="font-weight:bold;">Référence de l’offre: ${object.name}</span><br>
+    Validité: 1 mois à compter de ce jour.
+    <br><br>Standard Conditions apply:
+    <ol type="a">
+      <li>This offer is to be considered confidential information and should not be divulged to other parties.</li>
+      <li>This offer is only valid for the period stated.</li>
+      <li>Reference number above should be quoted at the time of ordering. Failure to do so may result in list prices being charged.</li>
+      <li>This offer is valid only for the purchase of the products listed above with respect to quantity &amp; type. A new quotation must be made for any modification.</li>
+      <li>Prices quoted do not include VAT or other sales taxes.</li>
+      <li>This offer may only be used once. Should a further offer be required for more purchases, please contact AMS Biotechnology.</li>
+    </ol>
+  </div>
+  <div><span style="font-weight:bold;">PAIEMENT :</span></div>
+  <div>
+    <ol>
+      <li>Règlement: 30 NET.</li>
+      <li>Modalités : Transfert bancaires, carte bancaire ou chèques.</li>
+      <li>Merci de visiter les termes et conditions pour de plus amples renseignements.</li>
+    </ol>
+  </div>
+  <div>Pour toutes questions ou informations supplémentaires, n’hésitez pas à me contacter.<br>Cordialement,<br>${object.user_id.name or object.company_id.name}</div>
+</div>

@@ -1,0 +1,88 @@
+<p><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Egregio Signore/Gentile Signora ${object.partner_id.name},</span>
+    <br><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Grazie per l’interesse nei prodotti AMSBIO.</span>
+    <br><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">I prezzi e le informazioni sulla spedizione sono i seguenti:</span><br><br></p>
+
+<p><br></p>
+<style>
+    .tem-table {
+        display: table;
+        border-top: 1px solid;
+        border-left: 1px solid;
+    }
+
+    .tem-header {
+        display: table-header-group;
+        font-weight: bold;
+    }
+
+    .tem-footer {
+        display: table-footer-group;
+        font-weight: bold;
+    }
+
+    .tem-element {
+        display: table-cell;
+        padding: 2px 4px;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+    }
+
+    .tem-row {
+        display: table-row;
+    }
+</style>
+
+<div class="tem-table">
+    <div class="tem-header">
+        <div class="tem-row">
+            <div class="tem-element">Codice</div>
+            <div class="tem-element">Descrizione</div>
+            <div class="tem-element">Dimensione della confezione</div>
+            <div class="tem-element">Prezzo unitario</div>
+            <div class="tem-element">Quantitá</div>
+            <div class="tem-element" style="text-align:right;">Prezzo (${object.pricelist_id.currency_id.name})</div>
+            <div class="tem-element">Scheda tecnica</div>
+            <div class="tem-element">Disponibilità*</div>
+        </div>
+    </div>
+    <div style="display:table-row-group;">
+        % for line in object.order_line:
+        <div class="tem-row">
+            <div class="tem-element">${line.product_id.x_studio_sku_1}</div>
+            <div class="tem-element">${line.name}</div>
+            <div class="tem-element">${line.x_studio_pack_size}</div>
+            <div class="tem-element">${line.price_unit}</div>
+            <div class="tem-element">${"%0.00f" % line.product_uom_qty}</div>
+            <div class="tem-element" style="text-align:right;">
+                ${ ("%0.02f" % line.price_subtotal) if (line.price_subtotal != False) else "" }
+            </div>
+            <div class="tem-element">
+                % if line.product_id and line.product_id.data_sheet_link
+                <a href="https://resources.amsbio.com/${line.product_id.data_sheet_link}">${line.x_studio_sku_1}</a>
+                % endif
+            </div>
+            <div class="tem-element">${line.qty_available_today or ''}</div>
+        </div>
+        % endfor
+    </div>
+    <div class="tem-footer">
+        <div class="tem-row">
+            <div class="tem-element">Prezzo di consegna:</div>
+            <div class="tem-element"></div>
+            <div class="tem-element"></div>
+            <div class="tem-element"></div>
+            <div class="tem-element"></div>
+            <div class="tem-element" style="text-align:right;">${object.amount_total}</div>
+        </div>
+    </div>
+</div>
+<p style="font-size:smaller;color:grey;">*Si prega di notare che i tempi di consegna sono stimati solo al meglio delle nostre conoscenze ed esperienze. / Il costo della spedizione varia se in ghiaccio secco</p>
+<br>
+<p>I prodotti possono essere ordinati tramite fax, telefono, posta elettronica <a href="${object.company_id.email}">email</a> (${object.company_id.email}) o semplicemente cliccando sull’immagine del carrello nella tavola precedente.
+    Per ulteriori informazioni sulla consegna vi preghiamo di leggere i  <a href="https://www.amsbio.com/terms-of-sale">termini e condizioni</a>.</p>
+
+<br>
+<p>Visitate il nostro sito internet <a href="www.amsbio.com">www.amsbio.com</a> per dettagli sui prezzi e per informazioni tecniche di <strong>piú di 1,700mila prodotti.</strong></p>
+<br>
+<p>Per ulteriori informazioni non esitate a ricontattarmi.<br>Cordiali saluti,</p> 
+<p> ${object.user_id.name or object.company_id.name} </p>
