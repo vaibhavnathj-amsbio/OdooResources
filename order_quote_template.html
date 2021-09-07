@@ -49,6 +49,7 @@
                 <h2 class="mt16">
                     <span t-if="doc.state not in ['draft','sent']">Order N°</span>
                     <span t-if="doc.state in ['draft','sent']">Quotation N°</span>
+                    <span t-if="doc.state in ['done']">Order Confirmation</span>
                     <span t-field="doc.name" />
                 </h2>
                 <br />
