@@ -1,32 +1,35 @@
-<p><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Hello ${object.partner_id.name},</span><br><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Thank you for your enquiry and interest in AMSBIO.</span><br><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Our pricing and ordering information are as follows:</span><br><br></p><p><br></p>
+<p><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Hello ${object.partner_id.name},</span><br><span
+        style="color:rgb(64, 64, 64);white-space: pre-wrap;">Thank you for your enquiry and interest in
+        AMSBIO.</span><br><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Our pricing and ordering
+        information are as follows:</span><br><br></p>
+<p><br></p>
 <style>
-    .tem-table{
+    .tem-table {
         display: table;
-        border-top:1px solid;
-	    border-left:1px solid;
+        border-top: 1px solid;
+        border-left: 1px solid;
     }
 
-    .tem-header{
+    .tem-header {
         display: table-header-group;
         font-weight: bold;
     }
 
-    .tem-footer{
+    .tem-footer {
         display: table-footer-group;
         font-weight: bold;
     }
 
-    .tem-element{
+    .tem-element {
         display: table-cell;
         padding: 2px 4px;
-        border-bottom:1px solid;
-        border-right:1px solid;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
     }
 
-    .tem-row{
+    .tem-row {
         display: table-row;
     }
-
 </style>
 
 <div class="tem-table">
@@ -45,9 +48,9 @@
     <div style="display:table-row-group;">
         % for line in object.order_line:
         <div class="tem-row">
-            <div class="tem-element">${line.product_id.x_studio_sku_1}</div>
+            <div class="tem-element">${line.product_id.default_code}</div>
             <div class="tem-element">${line.name}</div>
-            <div class="tem-element">${line.x_studio_pack_size}</div>
+            <div class="tem-element">${line.x_studio_packsize}</div>
             <div class="tem-element">${line.price_unit}</div>
             <div class="tem-element">${"%0.00f" % line.product_uom_qty}</div>
             <div class="tem-element" style="text-align:right;">
@@ -55,7 +58,7 @@
             </div>
             <div class="tem-element">
                 % if line.product_id and line.product_id.data_sheet_link
-                    <a href="https://resources.amsbio.com/${line.product_id.data_sheet_link}">${line.x_studio_sku_1}</a>
+                <a href="https://resources.amsbio.com/${line.product_id.data_sheet_link}">${line.default_code}</a>
                 % endif
             </div>
             <div class="tem-element">${line.qty_available_today or ''}</div>
@@ -63,7 +66,7 @@
         % endfor
     </div>
     <div class="tem-footer">
-        <div class="tem-row"> 
+        <div class="tem-row">
             <div class="tem-element">Total:</div>
             <div class="tem-element"></div>
             <div class="tem-element"></div>
@@ -76,36 +79,38 @@
 <p style="font-size:smaller;color:grey;">*&nbsp;Please note that delivery times are estimates only to the best of our
     knowledge and experience.</p>
 <div>
-<br>
-        <p>
-            <strong>Shipping information:</strong>
-            If you wish to order and have a FedEx, TNT or DHL courier account, please supply us with your number
-            and details.
-            <br>
-            ***&nbsp;Shipments will be at your own risk and responsibility&nbsp;***<br>
-            <strong>Note: For customers in the EU please note that if we have not received your EORI number the shipment will be delayed.</strong>
-        </p><br>
-        <p>
-            <strong>Payment:</strong>
-            We would request payment within 30 days of the order date.
-        </p><br>
-        <p>
-            Orders can be placed by phone, fax, <a href="${object.company_id.email}">email</a> (${object.company_id.email}), or on our <a href="www.amsbio.com">website </a>(www.amsbio.com).
-            <br>
-            Please visit our
-            <a href="https://www.amsbio.com/terms-of-sale">terms and conditions</a>
-            for further ordering information.
-        </p><br>
-        <p>
+    <br>
+    <p>
+        <strong>Shipping information:</strong>
+        If you wish to order and have a FedEx, TNT or DHL courier account, please supply us with your number
+        and details.
+        <br>
+        ***&nbsp;Shipments will be at your own risk and responsibility&nbsp;***<br>
+        <strong>Note: For customers in the EU please note that if we have not received your EORI number the shipment
+            will be delayed.</strong>
+    </p><br>
+    <p>
+        <strong>Payment:</strong>
+        We would request payment within 30 days of the order date.
+    </p><br>
+    <p>
+        Orders can be placed by phone, fax, <a href="${object.company_id.email}">email</a> (${object.company_id.email}),
+        or on our <a href="www.amsbio.com">website </a>(www.amsbio.com).
+        <br>
+        Please visit our
+        <a href="https://www.amsbio.com/terms-of-sale">terms and conditions</a>
+        for further ordering information.
+    </p><br>
+    <p>
         Please quote the following reference number should you wish to place an order:
         <br>
         <strong>Offer Ref: ${object.name}</strong>
         <br>
         Validity: 1 month from the date of offer
-        </p>
-        <div class="greyed-out">
-            <strong>Standard Conditions apply</strong>
-            <ol class="conditions-list">
+    </p>
+    <div class="greyed-out">
+        <strong>Standard Conditions apply</strong>
+        <ol class="conditions-list">
             <li>
                 This offer is to be considered confidential information and should not be divulged to other parties.
             </li>
@@ -133,19 +138,19 @@
                 This offer may only be used once.
                 Should a further offer be required for more purchases, please contact AMS Biotechnology.
             </li>
-            </ol>
-        </div>
+        </ol>
+    </div>
 
 
-        <p>
+    <p>
         Visit our website <a href="http://www.amsbio.com/">www.amsbio.com</a> for price details and technical
         specifications of <strong>over 1,800,000 products</strong>.
         If you can let us know which laboratory techniques you use, then we will be happy to send you information
         on relevant products.
-        </p>
+    </p>
 
-        
-        <p>If you have any questions or require further information please do not hesitate to contact us.</p>
-        <p>Kind regards,</p>
-        <p> ${object.user_id.name or object.company_id.name} </p>
+
+    <p>If you have any questions or require further information please do not hesitate to contact us.</p>
+    <p>Kind regards,</p>
+    <p> ${object.user_id.name or object.company_id.name} </p>
 </div>

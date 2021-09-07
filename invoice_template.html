@@ -109,7 +109,7 @@
                         <tr
                             t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                             <t t-if="not line.display_type" name="account_invoice_line_accountable">
-                                <td name="account_invoice_line_name"><span t-field="line.product_id.x_studio_sku"
+                                <td name="account_invoice_line_name"><span t-field="line.product_id.default_code"
                                         t-options="{'widget': 'text'}" /></td>
                                 <td name="account_invoice_line_name"><span t-field="line.name"
                                         t-options="{'widget': 'text'}" /></td>
@@ -127,7 +127,7 @@
                                 </td>
                                 <td name="td_taxes" class="text-right"><span t-esc="str('%.0f'%line.tax_ids.amount)" />%
                                 </td>
-                                <td name="td_tariffcode" class="text-right"><span t-field="line.x_studio_commodity_code"
+                                <td name="td_tariffcode" class="text-right"><span t-field="line.x_studio_tarriff_code"
                                         class="text-nowrap" /></td>
                                 <td name="td_subtotal" class="text-right o_price_total">
                                     <span t-field="line.price_total" />
