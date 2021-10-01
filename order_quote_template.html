@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-
+    <!-- Custom template -->
     <template id="report_saleorder_document_template">
         <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
         <t t-call="web.basic_layout">
-            <div class="header">
+            <div class="header" style="font-family: Calibri;">
                 <div class="row">
                     <div class="col-4 text-left">
                         <h6 style="margin-left: -2px;">
@@ -31,7 +30,7 @@
                 </div>
                 <hr />
             </div>
-            <div class="page">
+            <div class="page" style="font-family: Calibri;">
                 <div class="oe_structure" />
                 <div class="row">
                     <div class="col-6">
@@ -47,9 +46,8 @@
                 </div>
                 <br />
                 <h2 class="mt16">
-                    <span t-if="doc.state not in ['draft','sent']">Order N°</span>
+                    <span t-if="doc.state not in ['draft','sent']">Order Confirmation</span>
                     <span t-if="doc.state in ['draft','sent']">Quotation N°</span>
-                    <span t-if="doc.state in ['done']">Order Confirmation</span>
                     <span t-field="doc.name" />
                 </h2>
                 <br />
@@ -63,13 +61,17 @@
                         <strong>Order Date:</strong>
                         <p class="m-0" t-field="doc.date_order" />
                     </div>
-                    <div t-if="doc.date_order and doc.state in ['draft','sent']" class="col-auto col-3 mw-100 mb-2">
+                    <div t-if="doc.date_order and doc.state in ['draft','sent']" class=" col-auto col-3 mw-100 mb-2">
                         <strong>Quotation Date:</strong>
                         <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}' />
                     </div>
                     <div t-if="doc.payment_term_id" class="col-auto col-3 mw-100 mb-2">
                         <strong>Payment Terms:</strong>
                         <p class="m-0" t-field="doc.payment_term_id" />
+                    </div>
+                    <div t-if="doc.client_order_ref" class="col-auto col-3 mw-100 mb-2">
+                        <strong>Reference:</strong>
+                        <p class="m-0" t-field="doc.client_order_ref" />
                     </div>
                 </div>
                 <br />
@@ -108,7 +110,7 @@
                                 <t t-if="not line.display_type">
                                     <td name="td_codenum"><span t-field="line.product_id.default_code" /></td>
                                     <td name="td_name"><span t-field="line.name" style="width: 175px;" /></td>
-                                    <td name="td_packsize"><span t-field="line.x_studio_packsize" /></td>
+                                    <td name="td_packsize"><span t-field="line.product_id.x_studio_packsize" /></td>
                                     <td name="td_vat" class="text-right"><span
                                             t-esc="str('%.0f'%line.tax_id.amount)" />%
                                     </td>
@@ -178,7 +180,7 @@
                     </div>
                 </div>
                 <br />
-                <div t-if="doc.state == 'draft'">
+                <div t-if="doc.state in ['draft','sent']">
                     <p>
                         Orders can be placed by online on our website, phone, fax, email (
                         <t t-esc="doc.company_id.email" />).
@@ -230,6 +232,7 @@
                         text-align: justify;
                         font-size: 10pt;
                         page-break-before: always;
+                        font-family: Calibri, sans-serif;
                     }
 
                     .footer-style {
@@ -238,7 +241,7 @@
                         padding: 0px;
                     }
                 </style>
-                <div class="amsbio-tos">
+                <div t-if="doc.state in ['draft','sent']" class="amsbio-tos">
                     <h1>Terms of Sale</h1>
                     <h2>(1) Introduction</h2>
 
@@ -343,7 +346,8 @@
                     <p>
                         Whenever possible prices for products are quoted on our website. Where no price is stated prices
                         are
-                        available on enquiry. The website contains several hundred thousand products and it is always
+                        available on enquiry. The website contains several hundred thoUnited Statesnd products and it is
+                        always
                         possible
                         that some of the prices on the website may be incorrect. We will verify prices as part of our
                         sale
@@ -628,7 +632,7 @@
                     <p>
 
                         Our aggregate liability to you under the terms of sale will not exceed the greater of: (a) one
-                        thousand
+                        thoUnited Statesnd
                         pounds Sterling and (b) the total amount paid or (if greater) payable by you to us under the
                         terms
                         of
@@ -828,9 +832,19 @@
                         Supplies by our Swiss office are made under VAT number CHE-102.073.068 MWST
                     </p>
                 </div>
+                <div t-if="doc.state not in ['draft','sent']">
+                    <p>
+                        <strong>Cancellation Policy</strong>
+                        If you wish to cancel your order please call 617-945-5033
+                        or email
+                        <t t-esc="doc.company_id.email" />. Please note that any cancellation requests must be made
+                        within 24
+                        hours of receipt of this order confirmation email
+                    </p>
+                </div>
                 <div class="oe_structure" />
             </div>
-            <div class="footer">
+            <div class="footer" style="font-family: Calibri;">
                 <div class="text-center" style="border-top: 1px solid black; font-size: 8pt;">
                     <div class="row">
                         <div class="col-3">

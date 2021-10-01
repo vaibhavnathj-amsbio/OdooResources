@@ -1,3 +1,4 @@
+<!-- Custom template -->
 <template id="report_invoice_with_payments_template">
     <t t-call="web.html_container">
         <t t-foreach="docs" t-as="o">
@@ -11,7 +12,7 @@
 
 <template id="report_invoice_document_template">
     <t t-call="web.basic_layout">
-        <div t-attf-class="header" t-att-style="report_header_style">
+        <div t-attf-class="header" t-att-style="report_header_style" style="font-family: Calibri;">
             <div class="row">
                 <div class="col-4">
                     <h6 style="margin-left: -2px;">
@@ -38,10 +39,18 @@
             </div>
             <hr />
         </div>
-        <div class="page">
+        <div class="page" style="font-family: Calibri;">
             <div class="oe_structure" />
             <div class="row">
-                <div class="col-6" />
+                <div class="col-6">
+                    <div t-field="o.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' />
+                    <div t-if="o.partner_id.vat" class="mt16">
+                        <t t-if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label"
+                            id="inv_tax_id_label" />
+                        <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat" />
+                    </div>
+                </div>
                 <div class="col-6">
                     <strong>Delivery Address:</strong>
                     <div t-field="o.partner_shipping_id"
@@ -66,6 +75,10 @@
                 <div t-if="o.source_id.id" class="col-auto col-3 mw-100 mb-2">
                     <strong>Source:</strong>
                     <p class="m-0" t-field="o.source_id.id" />
+                </div>
+                <div t-if="o.ref" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Reference:</strong>
+                    <p class="m-0" t-field="o.ref" />
                 </div>
             </div>
             <br />
@@ -127,8 +140,8 @@
                                 </td>
                                 <td name="td_taxes" class="text-right"><span t-esc="str('%.0f'%line.tax_ids.amount)" />%
                                 </td>
-                                <td name="td_tariffcode" class="text-right"><span t-field="line.x_studio_tarriff_code"
-                                        class="text-nowrap" /></td>
+                                <td name="td_tariffcode" class="text-right"><span
+                                        t-field="line.product_id.x_studio_tarriff_code" class="text-nowrap" /></td>
                                 <td name="td_subtotal" class="text-right o_price_total">
                                     <span t-field="line.price_total" />
                                 </td>
@@ -186,7 +199,7 @@
             <br />
             <br />
             <p><strong>Please remit cheques to the above address.<br />Bank transfers may be made to:</strong></p>
-            <div t-if="o.company_id.country_id == 'United Kingdom'">
+            <div t-if="o.company_id.country_id.name == 'United Kingdom'">
                 <p>
                     HSBC Bank plc, 65 Cornmarket Street, Oxford, OX1 3HY- UK <br />
                     IBAN: GB20HBUK40353451723014 <br />
@@ -195,7 +208,7 @@
                     Account number: 51723014
                 </p>
             </div>
-            <div t-if="o.company_id.country_id == 'USA'">
+            <div t-if="o.company_id.country_id.name == 'United States'">
                 <p>
                     Santander Bank NA, 599 Massachussets Avenue, Cambridge, MA 02139 <br />
                     SWIFT code (BIC):SVRNUS33 <br />
@@ -203,7 +216,7 @@
                     Account name: AMSBIO LLC
                 </p>
             </div>
-            <div t-if="o.company_id.country_id == 'Switzerland'">
+            <div t-if="o.company_id.country_id.name == 'Switzerland'">
                 <p>
                     Union Bank of Switzerland, Piazza Riforma, CH Lugano <br />
                     IBAN: CH55 0024 7247 3124 1801 N <br />
@@ -217,9 +230,9 @@
             </div>
 
         </div>
-        <div class="footer">
+        <div class="footer" style="font-family: Calibri;">
             <div class="text-center" style="border-top: 1px solid black;">
-                <div t-if="o.company_id.country_id == 'USA'" class="row">
+                <div t-if="o.company_id.country_id.name == 'United States'" class="row">
                     <div class="col-12">
                         Page: <span class="page" /> / <span class="topage" />
                     </div>

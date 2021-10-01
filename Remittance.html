@@ -1,6 +1,7 @@
+<!-- Custom template -->
 <template id="report_payment_receipt_document_template">
     <t t-call="web.basic_layout">
-        <div t-attf-class="header" t-att-style="report_header_style">
+        <div t-attf-class="header" t-att-style="report_header_style" style="font-family: Calibri;">
             <div class="row">
                 <div class="col-4">
                     <h6 style="margin-left: -2px;">
@@ -27,7 +28,7 @@
             </div>
             <hr />
         </div>
-        <div class="page">
+        <div class="page" style="font-family: Calibri;">
             <div class="row">
                 <div class="col-6" />
                 <div class="col-6">
@@ -74,7 +75,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="footer">
+        <div class="footer" style="font-family: Calibri;">
             <div class="text-center" style="border-top: 1px solid black;">
                 <div t-if="o.company_id.country_id == 'USA'" class="row">
                     <div class="col-12">
@@ -110,3 +111,14 @@
         </t>
     </t>
 </template>
+
+<!-- Custom Reports -->
+<record id="action_report_payment_receipt_custom" model="ir.actions.report">
+    <field name="name">Remittance</field>
+    <field name="model">account.payment</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">account.report_payment_receipt_custom</field>
+    <field name="report_file">account.report_payment_receipt_custom</field>
+    <field name="binding_model_id" ref="model_account_payment" />
+    <field name="binding_type">report</field>
+</record>
