@@ -1,0 +1,45 @@
+SUbject: TO RESPOND WITHIN 24 Hrs ${object.state in ('draft') and 'Quotation' or 'Order'} Confirmation (Ref
+${object.name or 'n/a' })
+
+<div style="
+font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif;
+font-size: 12px;
+color: rgb(34, 34, 34);
+background-color: #FFF;
+">
+
+    <p>Dear ${object.partner_id.name},</p>
+    <p>Thank you for ordering from us!</p>
+
+    <p>Can you please take time to read carefully and provide within 24 hours the following information in relation to
+        the attached order confirmation to help us to ensure a smooth delivery of your order : <br />
+        <br />
+        <b>1.Required information :</b><br />
+        <&nbsp;&nbsp;>- <u>Your company/Institution EORI number</u> (as being importer), provided from your financial
+            department. <br />
+            <&nbsp;&nbsp;>- <u>A named individual in your institute/company and their contact</u> telephone number and
+                email for customs clearance. This may Include a payment of VAT or import duties. Please be aware that
+                import VAT is usually reclaimed (or exempted) by your institution and therefore it is not an additional
+                cost.
+                <br />
+                <br />
+                Please note your institute/company is the importer of record and needs to account for import VAT, small
+                customs fees (10 to 30€) and, in the unlikely event, import duties. <u>Your country customs may send you
+                    an invoice to require these costs before delivery of your product(s)</u>. This is very important for
+                dry ice shipments where delays may mean your products are damaged. AMSBIO does not take responsibility
+                for damage to products due to customs delays, rejected deliveries or VAT and duty payment delays caused
+                by you as the importer.
+                <br />
+                <br />
+                <b>2. Optional information (but useful)</b>
+                <&nbsp;&nbsp;> - <u>In case you are exempted from paying VAT and you have this proof</u>, please send us
+                    scanned copy so our courier can provide it to the customs authorities in your country. This may
+                    avoid a VAT payment before delivery.
+                    <&nbsp;&nbsp;> - <u>If you have an account with DHL</u> please provide your account number, often
+                        this facilitates clearance and delivery. We will not use these account numbers for delivery
+                        costs but only for payment of your import VAT and duties (if applicable).
+    </p>
+
+    <p>Kind regards,</p>
+    <p> ${object.user_id.name or object.company_id.name} </p>
+</div>

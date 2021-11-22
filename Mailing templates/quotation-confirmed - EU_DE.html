@@ -1,0 +1,45 @@
+Subject: BITTE ANTWORTEN SIE INNERHALB VON 24 STUNDEN – Auftragsbestätigung aus der Bestellung ${object.state in
+('draft') and 'Quotation' or 'Order'} Confirmation (Ref ${object.name or 'n/a' })
+
+<div style="
+font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif;
+font-size: 12px;
+color: rgb(34, 34, 34);
+background-color: #FFF;
+">
+
+    <p>Sehr geehrte Damen und Herren ${object.partner_id.name},</p>
+    <p>Vielen Dank für Ihre Bestellung bei uns!</p>
+
+    <p>Können Sie sich bitte die Zeit nehmen, die folgenden Informationen in Bezug auf die beigefügte
+        Auftragsbestätigung sorgfältig zu lesen und innerhalb von 24 Stunden bereitzustellen, um uns zu helfen, eine
+        reibungslose Lieferung Ihrer Bestellung zu gewährleisten:<br />
+        <br />
+        <b>1.Erforderliche Informationen:</b><br />
+        <u>Ihre Firma/Institution EORI-Nummer (als Importeur), die Sie von Ihrer Finanzabteilung erhalten. <br />
+            <u>Eine namentlich genannte Person in Ihrem Institut/Unternehmen und deren Kontakttelefonnummer und E-Mail
+                für die Zollabfertigung.</u> Dies kann eine Zahlung von Mehrwertsteuer oder Einfuhrabgaben beinhalten.
+            Bitte beachten Sie, dass die Einfuhrumsatzsteuer in der Regel von Ihrer Institution zurückgefordert (oder
+            befreit) wird und daher keine zusätzlichen Kosten anfallen.
+            <br />
+            Bitte beachten Sie, dass Ihr Institut/Ihr Unternehmen der eingetragene Importeur ist und die
+            Einfuhrumsatzsteuer, geringe Zollgebühren (10 bis 30 €) und im unwahrscheinlichen Fall Einfuhrzölle
+            berücksichtigen muss. Der Zoll Ihres Landes kann Ihnen eine Rechnung zusenden, um diese Kosten vor der
+            Lieferung Ihrer Produkte zu verlangen. Dies ist sehr wichtig für Trockeneissendungen, bei denen
+            Verzögerungen zu Schäden an Ihren Produkten führen können. AMSBIO übernimmt keine Verantwortung für Schäden
+            an Produkten aufgrund von Zollverzögerungen, abgelehnten Lieferungen oder Mehrwertsteuer- und
+            Zollzahlungsverzögerungen, die von Ihnen als Importeur verursacht werden..
+            <br />
+            <br />
+            <b>2.Optionale Informationen:</b>
+            <u>Falls Sie von der Mehrwertsteuer befreit sind und diesen Nachweis haben, senden Sie uns bitte eine
+                gescannte Kopie, damit unser Kurier sie den Zollbehörden in Ihrem Land zur Verfügung stellen kann.
+                Dadurch kann eine Mehrwertsteuerzahlung vor der Lieferung vermieden werden.<br />
+                Wenn Sie ein Konto bei <b>DHL</b> haben, geben Sie bitte Ihre Kontonummer an, dies erleichtert oft die
+                Abfertigung und Lieferung. Wir verwenden diese Kontonummern nicht für Versandkosten, sondern nur für die
+                Zahlung Ihrer Einfuhrumsatzsteuer und ggf. Zölle.
+    </p>
+
+    <p>Mit freundlichen Grüßen,</p>
+    <p> ${object.user_id.name or object.company_id.name} </p>
+</div>

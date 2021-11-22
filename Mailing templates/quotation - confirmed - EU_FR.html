@@ -1,0 +1,53 @@
+Subject: REPONDRE DANS LES 24Hrs – Confirmation de commande de votre Bon de Commande ${object.state in ('draft') and
+'Quotation' or 'Order'} Confirmation (Ref ${object.name or 'n/a' })
+To: ${(object.partner_shipping_id.id or object.partner_invoice_id.id or object.partner.id)}
+Attachment: ${(object.name or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}
+
+<div style="
+              font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif;
+              font-size: 12px;
+              color: rgb(34, 34, 34);
+              background-color: #FFF;
+              ">
+
+    <p>Bonjour ${object.partner_id.name},</p>
+    <p>Merci de votre commande chez nous!</p>
+
+    <p>Pouvez-vous s'il vous plaît prendre le temps de lire attentivement et de fournir dans les 24 heures les
+        informations suivantes en relation avec la confirmation de commande ci-jointe pour nous aider à assurer le
+        traitement rapide de votre livraison auprès des services de douanes locales: <br />
+        <br />
+        <b>1.Informations obligatoires:</b><br />
+        <&nbsp;&nbsp;>- <u>Le Numéro EORI</u> de votre établissement (ou entreprise) [étant importateur], souvent fourni
+            par votre service de finance. <br />
+            <&nbsp;&nbsp;>- <u>Une personne nommée dans votre institut / entreprise, son numéro de téléphone et son
+                    adresse e-mail </u>pour tout besoin éventuel au cours du processus de dédouanement et paiement de la
+                TVA avant livraison.
+                <br />
+                <br />
+                Veuillez noter que votre institut / entreprise est l'importateur officiel et de ce fait redevable de la
+                TVA, petit frais de douanes (souvent 10 à 30€) et, dans le cas improbable, des droits de douanes.
+                <u>YLes douanes de votre pays peuvent vous envoyer une facture pour exiger ces frais avant la livraison
+                    de votre (vos) produit (s)</u>. Ceci est très important pour les livraisons en carboglace où les
+                retards peuvent signifier que vos produits sont endommagés. AMSBIO n'assume aucune responsabilité pour
+                les dommages causés aux produits en raison de retards douaniers, de livraisons refusées ou de retards de
+                paiement de la TVA et des droits causés par vous en tant qu'importateur. Une information officielle du
+                gouvernement français au
+                (https://www.douane.gouv.fr/actualites/acheter-en-ligne-au-royaume-uni-apres-le-brexit)
+                <br />
+                <br />
+                <b>2. Information optionnelle (mais utile) </b>
+                <&nbsp;&nbsp;> - <u>Si vous êtes exonéré du paiement de la TVA et que vous disposez de cette preuve</u>,
+                    veuillez nous envoyer une copie scannée afin que notre transporteur puisse la fournir aux autorités
+                    douanières de votre pays. Cela peut éventuellement éviter un paiement de TVA avant la
+                    livraison.<br />
+                    <&nbsp;&nbsp;> -Si vous avez un <b>compte chez le transporteur DHL</b> de préférence, veuillez
+                        indiquer votre (vos) numéro (s) de compte, cela facilite souvent le dédouanement et la
+                        livraison. Nous n'utiliserons pas ces numéros de compte pour les frais de
+                        livraison mais uniquement pour paiement de la TVA et un petit frais administratif de douane qui
+                        peuvent vous être demandé avant livraison du produit.
+    </p>
+
+    <p>Cordialement,</p>
+    <p> ${object.user_id.name or object.company_id.name} </p>
+</div>
