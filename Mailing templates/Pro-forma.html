@@ -1,0 +1,32 @@
+Subject: Pro-forma invoice (Ref ${object.name or 'n/a' })
+
+<div style="
+font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif;
+font-size: 12px;
+color: rgb(34, 34, 34);
+background-color: #FFF;
+">
+
+    <p>Dear ${object.partner_id.name},</p>
+    <br>
+    <p>Thank you for ordering from us!</p>
+    <br>
+    <p>
+        Please find attached the pro-forma invoice. As soon as we receive the payment in full we will complete your
+        order. <br />
+        I invite you to <strong>check if all information on this pro-forma</strong> is correct (especially the delivery
+        and billing addresses), otherwise please let me know about any amendment needed to be done. <br /><br />
+
+        You have the following payment options (please mention the pro-forma number) : <br />
+
+    <ol>
+        <li>Call us at +44(0) 1235 828 200 to provide your credit card payment information (See attachment)</li>
+        <li>Fax the attached credit card information at +44(0) 1235 820 482</li>
+        <li>Bank transfer using our bank detailed as shown in the attached pro-forma</li>
+    </ol>
+    </p>
+    <p>Looking forward to hearing from you!</p>
+    <br>
+    <p>Kind regards,</p>
+    <p> ${object.user_id.name or object.company_id.name}</p>
+</div>
