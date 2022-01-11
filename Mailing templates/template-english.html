@@ -1,8 +1,12 @@
-<p><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Hello ${object.partner_id.name},</span><br><span
-        style="color:rgb(64, 64, 64);white-space: pre-wrap;">Thank you for your enquiry and interest in
-        AMSBIO.</span><br><span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Our pricing and ordering
-        information are as follows:</span><br><br></p>
+<p>
+    <span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Hello ${object.partner_id.name},</span><br><br>
+    <span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Thank you for your enquiry and interest in AMSBIO.</span><br>
+    <span style="color:rgb(64, 64, 64);white-space: pre-wrap;">Our pricing and ordering information are as follows:</span>
+    <br />
+    <br />
+</p>
 <p><br></p>
+
 <style>
     .tem-table {
         display: table;
@@ -57,8 +61,8 @@
                 ${ ("%0.02f" % line.price_subtotal) if (line.price_subtotal != False) else "" }
             </div>
             <div class="tem-element">
-                % if line.product_id and line.product_id.data_sheet_link
-                <a href="https://resources.amsbio.com/${line.product_id.data_sheet_link}">${line.default_code}</a>
+                % if line.product_id and line.product_id.type != "service"
+                <a href="https://resources.amsbio.com/Datasheets/${line.product_id.default_code}">${line.product_id.default_code}</a>
                 % endif
             </div>
             <div class="tem-element">${line.qty_available_today or ''}</div>
@@ -151,6 +155,7 @@
 
 
     <p>If you have any questions or require further information please do not hesitate to contact us.</p>
+    <br />
     <p>Kind regards,</p>
     <p> ${object.user_id.name or object.company_id.name} </p>
 </div>
