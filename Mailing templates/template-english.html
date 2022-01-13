@@ -61,9 +61,9 @@
                 ${ ("%0.02f" % line.price_subtotal) if (line.price_subtotal != False) else "" }
             </div>
             <div class="tem-element">
-                % if line.product_id and line.product_id.type != "service"
+                <!-- % if line.product_id and line.product_id.type != "service"
                 <a href="https://resources.amsbio.com/Datasheets/${line.product_id.default_code}">${line.product_id.default_code}</a>
-                % endif
+                % endif -->
             </div>
             <div class="tem-element">${line.qty_available_today or ''}</div>
         </div>
